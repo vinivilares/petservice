@@ -1,0 +1,57 @@
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+model Tutor {
+  id       String @id @default(cuid())
+  email    String @unique
+  password String
+  tipo     String
+
+  pets Pet[]
+
+  @@map("tutores")
+}
+
+model Pet {
+  id      String  @id @default(cuid())
+  Tutor   Tutor?  @relation(fields: [tutorId], references: [id])
+  tutorId String?
+
+  vacinas Vacina[]
+
+  @@map("pets")
+}
+
+model Vacina {
+  id    String  @id @default(cuid())
+  Pet   Pet?    @relation(fields: [petId], references: [id])
+  petId String?
+
+  @@map("vacinas")
+}
+
+model Petshop {
+  id       String @id @default(cuid())
+  email    String @unique
+  password String
+  tipo     String
+
+  @@map("petshops")
+}
+
+model Veterinario {
+  id       String @id @default(cuid())
+  email    String @unique
+  password String
+  tipo     String
+
+  @@map("veterinarios")
+}
