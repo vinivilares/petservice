@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
+import styles from "./main-navigation.module.css"
+import Home from "../icons/home";
+import Settings from "../icons/settings";
+import Pets from "../icons/pets";
+import Vacina from "../icons/vacina";
 
 function MainNavigation() {
   const { data: session, status } = useSession();
@@ -10,14 +15,18 @@ function MainNavigation() {
     signOut().then(router.push("/"));
   }
 
+  function handleConfig() {
+    submenu.style.display == "block" ? (submenu.style.display = "none") : (submenu.style.display = "block");
+  }
+
   return (
-    <header>
+    <header className={styles.header}>
       <Link href="/">
         <a>
           <div>PetService</div>
         </a>
       </Link>
-      <nav>
+      <nav className={styles.menu}>
         <ul>
           {!session && (
             <li>
@@ -26,13 +35,36 @@ function MainNavigation() {
           )}
           {session && (
             <>
-              <li>
-                <Link href="/tutor">Profile</Link>
+              <Link href="/">
+                <li className={styles.icon}>
+                  <Home />
+                </li>
+              </Link>
+
+              <Link href="/pets">
+                <li className={styles.icon}>
+                  <Pets />
+                </li>
+              </Link>
+
+
+
+              <Link href="/vacinas">
+                <li className={styles.icon}>
+                  <Vacina />
+                </li>
+              </Link>
+
+              <li className={styles.configuracoes} onClick={handleConfig}>
+                <Settings />
               </li>
 
-              <li>
-                <button onClick={handleLogout}>Logout</button>
-              </li>
+              <ul id="submenu" className={styles.submenu}>
+                <li>
+                  <Link href={"/tutor"}>Meu Perfil</Link>
+                </li>
+                <li onClick={handleLogout}>Sair</li>
+              </ul>
             </>
           )}
         </ul>

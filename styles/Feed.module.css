@@ -5,6 +5,10 @@
     margin: 20px 0;
 }
 
+.icons {
+    color: white;
+}
+
 .main {
     display: flex;
 }
@@ -31,4 +35,6 @@
         margin: 0;
         width: 600px;
     }
+
+   
 }

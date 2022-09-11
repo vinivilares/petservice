@@ -3,6 +3,7 @@ import Link from "next/link";
 import { buscarUser } from "../lib/prisma";
 
 export default function Tutor({ user }) {
+
   return (
     <>
       <p>{user.email}</p>
