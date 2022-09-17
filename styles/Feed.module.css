@@ -1,40 +1,112 @@
-.lojas {
-    background-color: rgba(128, 128, 128, 0.411);
-    list-style-type: none;
-    padding: 30px;
-    margin: 20px 0;
-}
-
-.icons {
-    color: white;
-}
-
 .main {
-    display: flex;
+  display: flex;
+  /* height: 100vh; */
+  width: 70vw;
+  margin: auto;
+  justify-content: space-around;
 }
 
-.main > div:nth-child(1) {
-    height: 400px;
-    background-color: rgba(173, 132, 132, 0.411);
-    margin: 20px 30px;
-    padding: 10px;
-}
-.main > div:nth-child(2) {
-    width: 80vw;
+.busca {
+  background-color: #e7985c;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.13);
+  border-radius: 5px;
 }
 
-@media screen and (max-width: 600px) {
-    .main {
-        display: block;
-        transition: 1s;
-    }
-    .main > div:nth-child(1) {
-        background-color: aqua;
-        height: 40px;
-        display: flex;
-        margin: 0;
-        width: 600px;
-    }
-
-   
+.busca h2 {
+  text-align: center;
 }
+
+.filtros {
+  margin: 10px 0px;
+  display: flex;
+  align-items: center;
+}
+
+.busca input[type="text"] {
+  height: 30px;
+}
+
+.busca input[type="text"]:focus {
+  outline: none;
+}
+
+.filtros input[type="checkbox"] {
+  width: 30px;
+  height: 30px;
+}
+
+.submit input[type="submit"] {
+  width: 100%;
+  height: 30px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #f5f1ef;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.13);
+}
+
+.submit input[type="submit"]:hover {
+  background-color: rgb(180, 176, 175);
+}
+
+.lista {
+  width: 100%;
+}
+
+.cards {
+  list-style-type: none;
+  background-color: #f5f1ef;
+  box-shadow: 2px 2px 2px #f5f1ef;
+  margin: 20px 0px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.cards:hover {
+  cursor: pointer;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.13);
+}
+
+.cardImg {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #e7985c;
+}
+
+.cardImg img {
+  border-radius: 50%;
+  height: 100%;
+}
+
+.cardInfo {
+  /* background-color: red; */
+  margin: 0px 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardInfo button {
+  width: 100px;
+  height: 50px;
+  border: none;
+  background-color: #e7985c;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.13);
+  border-radius: 5px;
+}
+
+.cardInfo button:hover {
+  background-color: #a5583c;
+  cursor: pointer;
+}
+
+/* Cores /
+/ #E7985C /
+/ #A5583C /
+/ #D3B094 /
+/ #F5F1EF /
+/ #E19150 */

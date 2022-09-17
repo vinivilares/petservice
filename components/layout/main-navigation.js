@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
-import styles from "./main-navigation.module.css"
+import styles from "./main-navigation.module.css";
 import Home from "../icons/home";
 import Settings from "../icons/settings";
 import Pets from "../icons/pets";
@@ -16,15 +16,15 @@ function MainNavigation() {
   }
 
   function handleConfig() {
-    submenu.style.display == "block" ? (submenu.style.display = "none") : (submenu.style.display = "block");
+    submenu.style.display == "block"
+      ? (submenu.style.display = "none")
+      : (submenu.style.display = "block");
   }
 
   return (
     <header className={styles.header}>
       <Link href="/">
-        <a>
-          <div>PetService</div>
-        </a>
+        <h2>PetService</h2>
       </Link>
       <nav className={styles.menu}>
         <ul>
@@ -46,8 +46,6 @@ function MainNavigation() {
                   <Pets />
                 </li>
               </Link>
-
-
 
               <Link href="/vacinas">
                 <li className={styles.icon}>
