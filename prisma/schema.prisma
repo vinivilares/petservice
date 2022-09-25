@@ -15,7 +15,12 @@ model Tutor {
   password String
   tipo     String
 
+  nome String?
+
   pets Pet[]
+
+  endereco   Endereco? @relation(fields: [enderecoId], references: [id])
+  enderecoId Int?
 
   @@map("tutores")
 }
@@ -24,6 +29,11 @@ model Pet {
   id      String  @id @default(cuid())
   Tutor   Tutor?  @relation(fields: [tutorId], references: [id])
   tutorId String?
+
+  nome    String?
+  idade   Int?
+  raca    String?
+  especie String?
 
   vacinas Vacina[]
 
@@ -39,19 +49,40 @@ model Vacina {
 }
 
 model Petshop {
-  id       String @id @default(cuid())
-  email    String @unique
+  id       String  @id @default(cuid())
+  email    String  @unique
   password String
   tipo     String
+  nome     String?
+
+  endereco   Endereco? @relation(fields: [enderecoId], references: [id])
+  enderecoId Int?
 
   @@map("petshops")
 }
 
 model Veterinario {
-  id       String @id @default(cuid())
-  email    String @unique
+  id       String  @id @default(cuid())
+  email    String  @unique
   password String
   tipo     String
+  nome     String?
+
+  endereco   Endereco? @relation(fields: [enderecoId], references: [id])
+  enderecoId Int?
 
   @@map("veterinarios")
+}
+
+model Endereco {
+  id          Int           @id @default(autoincrement())
+  cep         String
+  logradouro  String
+  complemento String?
+  bairro      String
+  localidade  String
+  uf          String
+  Veterinario Veterinario[]
+  Tutor       Tutor[]
+  Petshop     Petshop[]
 }
