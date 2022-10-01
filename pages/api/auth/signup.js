@@ -6,7 +6,7 @@ import { buscarUser, prisma } from "../../../lib/prisma";
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const data = req.body;
-    const { email, password, tipo } = data;
+    const { email, password, tipo, nome } = data;
 
     if (
       !email ||
@@ -37,9 +37,9 @@ export default async function handler(req, res) {
           email: email,
           password: hashedPassword,
           tipo: tipo,
+          nome: nome,
         },
       });
-
     }
 
     // // Criação da conta do pethop
@@ -49,9 +49,9 @@ export default async function handler(req, res) {
           email: email,
           password: hashedPassword,
           tipo: tipo,
+          nome: nome,
         },
       });
-
     }
 
     // Criação da conta do veterinário
@@ -59,11 +59,11 @@ export default async function handler(req, res) {
       const user = await prisma.veterinario.create({
         data: {
           email: email,
+          nome: nome,
           password: hashedPassword,
           tipo: tipo,
         },
       });
-
     }
 
     res.status(201).json({ message: "Usuário Criado!" });
