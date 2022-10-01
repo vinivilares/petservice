@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import { signIn, getSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import styles from "../styles/Index.module.css";
 
 import { buscarUser } from "../lib/prisma";
 
@@ -22,42 +23,48 @@ export default function Home() {
       password: enteredPassword,
     });
 
-    router.push("/")
+    router.push("/");
   }
   return (
-    <>
+    <div className={styles.main}>
       <div>
         <h1>PetService</h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui esse quas
-          culpa tempore magnam mollitia praesentium velit! Omnis, ut recusandae
-          veniam ipsum, quam vero, aperiam obcaecati vel maxime veritatis enim!
+          O PetService tem como intuito criar uma ponte entre donos de animais,
+          veterinários, clínicas e lojas Pet.
         </p>
       </div>
-      <div>
-        <form onSubmit={submitHandler}>
-          <div>
-            <label htmlFor="email">Email:</label>
-            <input type="email" ref={emailInputRef} />
+
+      <form onSubmit={submitHandler} className={styles.loginForm}>
+        <div>
+          <div className={styles.controllers}>
+            <input
+              type="email"
+              ref={emailInputRef}
+              placeholder="email@email.com"
+            />
           </div>
-          <div>
-            <label htmlFor="email">Senha:</label>
-            <input type="password" ref={passwordInputRef} />
+          <div className={styles.controllers}>
+            <input
+              type="password"
+              ref={passwordInputRef}
+              placeholder="**********"
+            />
           </div>
-          <div>
+          <div className={styles.loginButton}>
             <button type="submit">Entrar</button>
           </div>
-          <div>
-            <p>
-              Não tem uma conta ?
-              <button>
-                <Link href="/signup">Criar Conta</Link>
-              </button>
-            </p>
-          </div>
-        </form>
-      </div>
-    </>
+        </div>
+        <div className={styles.criarConta}>
+          <p>
+            Não tem uma conta ?
+            <button>
+              <Link href="/signup">Criar Conta</Link>
+            </button>
+          </p>
+        </div>
+      </form>
+    </div>
   );
 }
 

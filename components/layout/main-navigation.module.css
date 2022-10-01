@@ -1,63 +1,66 @@
 .header {
-    background-color: #E7985C;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 15px;
+  display: flex;
+  background-color: #e7985c;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 }
 
 .header h2 {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-.menu>ul {
-    display: flex;
-    list-style: none;
+.menu > ul {
+  display: flex;
+  list-style: none;
 }
 
-.menu>ul>li {
-    margin-left: 20px;
+.menu > ul > li {
+  margin-left: 20px;
 }
 
 .icon {
-    color: #f1fffa;
-    width: 30px;
-    transition: 0.2s;
+  color: #f1fffa;
+  width: 30px;
+  transition: 0.2s;
 }
 
 .icon:hover {
-    cursor: pointer;
-    color: #785964;
+  cursor: pointer;
+  color: #785964;
 }
 
 .configuracoes {
-    width: 30px;
-    color: #f1fffa;
-    list-style: none;
+  width: 30px;
+  color: #f1fffa;
+  list-style: none;
 }
 
 .configuracoes:hover {
-    cursor: pointer;
-    color: #785964;
+  cursor: pointer;
+  color: #785964;
 }
 
 .submenu {
-    position: absolute;
-    background-color: #E7985C;
-    margin-top: 54px;
-    right: 0;
-    display: none;
-    padding: 0;
+  position: absolute;
+  background-color: #e7985c;
+  margin-top: 55px;
+  right: 0;
+  display: none;
+  padding: 0;
 }
 
-.submenu>li {
-    width: 160px;
-    list-style: none;
-    padding: 10px;
-    border-top: 1px solid #f1fffa;
+.submenu > li {
+  width: 160px;
+  list-style: none;
+  padding: 10px;
+  border-top: 1px solid #f1fffa;
 }
 
-.submenu>li:hover {
-    background-color: #c28150;
-    cursor: pointer;
+.submenu > li:hover {
+  background-color: #c28150;
+  cursor: pointer;
 }

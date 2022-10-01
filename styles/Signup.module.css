@@ -1,13 +1,39 @@
+/* #E7985C */
+/* #A5583C */
+/* #D3B094 */
+/* #F5F1EF */
+/* #E19150 */
+
+.main {
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f1ef;;
+  height: 100vh;
+  text-align: center;
+}
+
 .title {
   text-align: center;
 }
 
 .form {
-    text-align: center;
-    align-items: center;
+  text-align: center;
+  align-items: center;
 }
-
 
 .input {
   display: block;
+  height: 40px;
+}
+
+.action > button {
+  background-color: #E19150;
+  border: none;
+  width: 150px;
+  height: 40px;
+}
+
+.action > button:hover {
+  cursor: pointer;
+  background-color: #d38648;
 }

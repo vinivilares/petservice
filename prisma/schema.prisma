@@ -1,39 +1,39 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
 datasource db {
   provider             = "mysql"
   url                  = env("DATABASE_URL")
   referentialIntegrity = "prisma"
 }
 
-generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
-}
-
 model Tutor {
-  id       String @id @default(cuid())
-  email    String @unique
+  id       String  @id @default(cuid())
+  email    String  @unique
   password String
   tipo     String
+  nome     String?
 
-  nome String?
-
-  pets Pet[]
-
-  endereco   Endereco? @relation(fields: [enderecoId], references: [id])
+  endereco   Endereco? @relation(fields: [enderecoId], references: [id], onDelete: Cascade)
   enderecoId Int?
+
+  Pet Pet[]
 
   @@map("tutores")
 }
 
 model Pet {
-  id      String  @id @default(cuid())
-  Tutor   Tutor?  @relation(fields: [tutorId], references: [id])
+  id String @id @default(cuid())
+
+  tutor   Tutor?  @relation(fields: [tutorId], references: [id], onDelete: Cascade)
   tutorId String?
 
-  nome    String?
-  idade   Int?
-  raca    String?
   especie String?
+  idade   Int?
+  nome    String?
+  raca    String?
 
   vacinas Vacina[]
 
@@ -41,48 +41,69 @@ model Pet {
 }
 
 model Vacina {
-  id    String  @id @default(cuid())
-  Pet   Pet?    @relation(fields: [petId], references: [id])
+  id String @id @default(cuid())
+
+  Pet   Pet?    @relation(fields: [petId], references: [id], onDelete: Cascade)
   petId String?
 
   @@map("vacinas")
 }
 
 model Petshop {
-  id       String  @id @default(cuid())
-  email    String  @unique
+  id       String @id @default(cuid())
+  email    String @unique
   password String
   tipo     String
-  nome     String?
 
-  endereco   Endereco? @relation(fields: [enderecoId], references: [id])
+  nome String?
+
+  endereco   Endereco? @relation(fields: [enderecoId], references: [id], onDelete: Cascade)
   enderecoId Int?
+
+  servicos Servico[]
 
   @@map("petshops")
 }
 
 model Veterinario {
-  id       String  @id @default(cuid())
-  email    String  @unique
+  id       String @id @default(cuid())
+  email    String @unique
   password String
   tipo     String
-  nome     String?
 
-  endereco   Endereco? @relation(fields: [enderecoId], references: [id])
+  nome String?
+
+  endereco   Endereco? @relation(fields: [enderecoId], references: [id], onDelete: Cascade)
   enderecoId Int?
+
+  servicos Servico[]
 
   @@map("veterinarios")
 }
 
 model Endereco {
-  id          Int           @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   cep         String
   logradouro  String
   complemento String?
   bairro      String
   localidade  String
   uf          String
+
   Veterinario Veterinario[]
-  Tutor       Tutor[]
   Petshop     Petshop[]
+  Tutor       Tutor[]
+}
+
+model Servico {
+  id Int @id @default(autoincrement())
+
+  nome      String
+  descricao String
+  preco     Decimal
+
+  Veterinario   Veterinario? @relation(fields: [veterinarioId], references: [id], onDelete: Cascade)
+  veterinarioId String
+  Petshop       Petshop?     @relation(fields: [petshopId], references: [id])
+  petshopId     String
 }

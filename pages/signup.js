@@ -1,4 +1,5 @@
 import styles from "../styles/Signup.module.css";
+import Link from "next/link";
 
 import { buscarUser } from "../lib/prisma";
 
@@ -10,6 +11,8 @@ export default function Signup() {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const tipoInputRef = useRef();
+  const nomeInputRef = useRef();
+
   const router = useRouter();
 
   async function submitHandler(event) {
@@ -18,13 +21,15 @@ export default function Signup() {
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
     const enteredTipo = tipoInputRef.current.value;
+    const enteredNome = nomeInputRef.current.value;
 
     // TODO add validação
     try {
       const result = await createUser(
         enteredEmail,
         enteredPassword,
-        enteredTipo
+        enteredTipo,
+        enteredNome
       );
       console.log(result);
       router.push("/");
@@ -34,8 +39,11 @@ export default function Signup() {
   }
 
   return (
-    <>
+    <div className={styles.main}>
       <h1 className={styles.title}>Crie sua conta</h1>
+      <p>
+        Já tenho uma conta. <Link href={"/"}>Voltar</Link>
+      </p>
       <form className={styles.form} onSubmit={submitHandler}>
         <div className={styles.input}>
           <label>Tipo: </label>
@@ -44,6 +52,11 @@ export default function Signup() {
             <option value={"veterinario"}>Veterinário</option>
             <option value={"petshop"}>Petshop</option>
           </select>
+        </div>
+
+        <div className={styles.input}>
+          <label>Nome: </label>
+          <input type={"text"} required ref={nomeInputRef} />
         </div>
 
         <div className={styles.input}>
@@ -59,8 +72,14 @@ export default function Signup() {
         <div className={styles.action}>
           <button type={"submit"}>Cadastrar</button>
         </div>
+
+        <div className={styles.action}>
+          <Link href={"/"}>
+            <button>Cancelar</button>
+          </Link>
+        </div>
       </form>
-    </>
+    </div>
   );
 }
 
@@ -87,10 +106,10 @@ export async function getServerSideProps(context) {
   }
 }
 
-async function createUser(email, password, tipo) {
+async function createUser(email, password, tipo, nome) {
   const response = await fetch("/api/auth/signup", {
     method: "POST",
-    body: JSON.stringify({ email, password, tipo }),
+    body: JSON.stringify({ email, password, tipo, nome }),
     headers: {
       "Content-Type": "application/json",
     },
