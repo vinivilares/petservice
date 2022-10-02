@@ -10,6 +10,7 @@
   background-color: #E7985C ;
   border: none;
   border-radius: 10px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.13);
 }
 
 .tabela {
@@ -22,11 +23,12 @@
 
 .tabela th,
 .tabela td {
-  border: 1px solid black;
+  border: 1px solid #E19150 ;
 }
 
-.tabela tr:nth-child(even) {
-  background-color: #e69f68;
+.tabela tr:nth-child(odd) {
+  background-color: #F5F1EF;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.13);
 }
 
 /* Cores */

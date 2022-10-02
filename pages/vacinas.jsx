@@ -20,12 +20,13 @@ export default function Vacinas() {
             <th>Ações</th>
           </tr>
         </thead>
+
         {vacinas.map((vacina) => (
           <tr>
             <td>{vacina.pet}</td>
             <td>{vacina.data}</td>
             <td>{vacina.tipo}</td>
-            <td>
+            <td className={styles.main}>
               <button>Editar</button>
               <button>Excluir</button>
             </td>
