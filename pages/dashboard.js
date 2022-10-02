@@ -13,6 +13,8 @@ export default function Dashobard({ user }) {
 export async function getServerSideProps(context) {
   const userSession = await getSession(context);
 
+  console.log(userSession);
+
   if (!userSession) {
     return {
       redirect: {

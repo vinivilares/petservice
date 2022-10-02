@@ -5,13 +5,40 @@ import { buscarUser } from "../lib/prisma";
 
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export default function Signup() {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const tipoInputRef = useRef();
   const nomeInputRef = useRef();
+
+  const [endereco, setEndereco] = useState({
+    cep: "",
+    logradouro: "",
+    complemento: "",
+    bairro: "",
+    localidade: "",
+    uf: "",
+  });
+
+  async function enderecoHandler() {
+    const response = await fetch(
+      `https://viacep.com.br/ws/${endereco.cep}/json/`
+    );
+
+    const data = await response.json();
+
+    setEndereco({
+      cep: data.cep,
+      logradouro: data.logradouro,
+      complemento: data.complemento,
+      bairro: data.bairro,
+      localidade: data.bairro,
+      uf: data.uf,
+    });
+    console.log(data);
+  }
 
   const router = useRouter();
 
@@ -44,6 +71,7 @@ export default function Signup() {
       <p>
         Já tenho uma conta. <Link href={"/"}>Voltar</Link>
       </p>
+      <h2>Dados Básico</h2>
       <form className={styles.form} onSubmit={submitHandler}>
         <div className={styles.input}>
           <label>Tipo: </label>
@@ -67,6 +95,77 @@ export default function Signup() {
         <div className={styles.input}>
           <label>Senha: </label>
           <input type={"password"} required ref={passwordInputRef} />
+        </div>
+
+        <h2>Endereço</h2>
+        <div className={styles.input}>
+          <label htmlFor="cep">CEP:</label>
+          <input
+            id="cep"
+            type={"text"}
+            onChange={({ target }) => {
+              setEndereco({ ...endereco, cep: target.value });
+            }}
+            onBlur={enderecoHandler}
+          />
+        </div>
+
+        <div className={styles.input}>
+          <label htmlFor="rua">Rua:</label>
+          <input
+            id="rua"
+            type={"text"}
+            value={endereco.logradouro}
+            onChange={({ target }) => {
+              setEndereco({ ...endereco, logradouro: target.value });
+            }}
+          />
+        </div>
+
+        <div className={styles.input}>
+          <label htmlFor="complemento">Complemento:</label>
+          <input
+            id="complemento"
+            type={"text"}
+            value={endereco.complemento}
+            onChange={({ target }) => {
+              setEndereco({ ...endereco, complemento: target.value });
+            }}
+          />
+        </div>
+
+        <div className={styles.input}>
+          <label htmlFor="bairro">Bairro:</label>
+          <input
+            id="bairro"
+            type={"text"}
+            value={endereco.bairro}
+            onChange={({ target }) => {
+              setEndereco({ ...endereco, bairro: target.value });
+            }}
+          />
+        </div>
+        <div className={styles.input}>
+          <label htmlFor="localidade">Cidade:</label>
+          <input
+            id="localidade"
+            type={"text"}
+            value={endereco.localidade}
+            onChange={({ target }) => {
+              setEndereco({ ...endereco, localidade: target.value });
+            }}
+          />
+        </div>
+        <div className={styles.input}>
+          <label htmlFor="uf">UF:</label>
+          <input
+            id="uf"
+            type={"text"}
+            value={endereco.uf}
+            onChange={({ target }) => {
+              setEndereco({ ...endereco, uf: target.value });
+            }}
+          />
         </div>
 
         <div className={styles.action}>

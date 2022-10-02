@@ -1,72 +1,54 @@
+import { buscarUser } from "../lib/prisma";
+import { getSession } from "next-auth/react";
+import styles from "../styles/servico.module.css"
 
 
-export default function Servicos({data}) {
+export default function Servicos({ data }) {
   return (
-    <main className="teste">
+    <main className={styles.main}>
 
-      <br/>
-      <br/>
-      <br/>
 
-      <div>
+
+      <div className={styles.subMenu}>
 
         <h1> SERVIÇOS </h1>
-          <img url = 'https://cdn-icons-png.flaticon.com/512/1665/1665629.png'/>
-          <img url = 'https://cdn-icons-png.flaticon.com/512/1665/1665628.png'/>
-          <img url = 'https://cdn-icons-png.flaticon.com/512/748/748122.png'/>   
-        
+
       </div>
 
-       <ul>
+      <ul>
 
-        {data.map(item =>(
-      
-        
-          <li >{item.nome}</li>
+        {data.servicos.map(item => (
+
+
+          <li className={styles.lista}>{item.nmServ.NomeServico}</li>
 
         ))}
-        <li>
+      </ul>
 
-        </li>
-      </ul>  
-    
     </main>
-  
+
   )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
 
-  
-  const data = [
-    {
-      id: 1,
-      nome: "Banho e Tosa",
-    },
-    {
-      id: 2,
-      nome: "Consulta",
-    },
-    {
-      id: 3,
-      nome: "Serviço de veterinario",
-    },
-    {
-      id: 4,
-      nome: "Internação ",
-    },
-    {
-      id: 5,
-      nome: "teste2",
-    }
-  ];
-  return{
-    props:{
+  const userSession = await getSession(context)
+
+  const user = await buscarUser(userSession.user.email)
+
+  const response = await fetch(
+    `http://localhost:3000/api/petVetId/${user.id}`
+  );
+
+  const data = await response.json();
+  console.log(data)
+
+  return {
+    props: {
       data
     }
   }
 }
-
 
 
 

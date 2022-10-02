@@ -11,15 +11,9 @@ export default async function handler(req, res) {
   const servicos = await buscarServicos(petVet.id);
 
   const dados = {
-    dados: {
-      ...petVet,
-    },
-    endereco: {
-      ...endereco,
-    },
-    servicos: {
-      ...servicos,
-    },
+    dados: petVet,
+    endereco: endereco,
+    servicos: servicos,
   };
 
   prisma.$disconnect();
