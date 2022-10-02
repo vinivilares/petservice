@@ -1,10 +1,13 @@
+import {getSession} from "next-auth/react"
+import {buscarUser} from "../lib/prisma"
 
-export default function getServicos({data}) {
+export default function Servicos({data}) {
   return (
     <main className="teste">
+
       <br/>
       <br/>
-      <br/>
+ 625k     <br/>
 
       <div>
 
@@ -17,49 +20,38 @@ export default function getServicos({data}) {
           <img url = 'https://cdn-icons-png.flaticon.com/512/748/748122.png'/>   
         </div>
       </div>
-      <ul>
-        {data.map(item =>(
+
+      {/* <ul>
+        {data.servicos.map(item =>(
       
         
-          <li >{item.title}</li>
+          <li >{item.descricao}</li>
 
         ))}
         <li>
 
         </li>
-      </ul>
+      </ul>  */}
+    
     </main>
   )
 }
+// pegando o contexto (quam essa logado na pag.)
+export async function getServerSideProps(context) {
 
-export async function getServerSideProps() {
+   const userSession = await getSession(context) 
 
-  
-  const data = [
-    {
-      id: 1,
-      title: "Banho e Tosa",
-    },
-    {
-      id: 2,
-      title: "Consulta",
-    },
-    {
-      id: 3,
-      title: "Serviço de veterinario",
-    },
-    {
-      id: 4,
-      title: "Internação ",
-    },
-    {
-      id: 5,
-      title: "teste2",
-    }
-  ];
+   const user = await buscarUser(userSession.user.email)
+
+   const response = await fetch(
+     `http://localhost:3000/api/petVetId/${user.id}`);
+     console.log(user.id)
+    
+   const data = await response.json();
+   
   return{
     props:{
-      data
+      data : servicos
     }
   }
 }

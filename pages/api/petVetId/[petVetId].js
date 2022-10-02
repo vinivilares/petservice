@@ -23,5 +23,5 @@ export default async function handler(req, res) {
   };
 
   prisma.$disconnect();
-  return res.status(200).json(dados);
+  res.status(200).json(dados);
 }
