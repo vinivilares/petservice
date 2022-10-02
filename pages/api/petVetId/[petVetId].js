@@ -10,6 +10,7 @@ export default async function handler(req, res) {
   const endereco = await buscarEndereco(petVet.enderecoId);
   const servicos = await buscarServicos(petVet.id);
 
+  
   const dados = {
     dados: {
       ...petVet,
@@ -23,5 +24,5 @@ export default async function handler(req, res) {
   };
 
   prisma.$disconnect();
-  return res.status(200).json(dados);
+  res.status(200).json(dados);
 }
