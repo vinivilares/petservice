@@ -1,0 +1,37 @@
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+.main>button{
+  width: 80%;
+  margin: 20px auto;
+  padding: 10px;
+  background-color: #E7985C ;
+  border: none;
+  border-radius: 10px;
+}
+
+.tabela {
+  width: 80%;
+  text-align: center;
+  margin-top: 10px;
+  margin: auto;
+  border-collapse: collapse;
+}
+
+.tabela th,
+.tabela td {
+  border: 1px solid black;
+}
+
+.tabela tr:nth-child(even) {
+  background-color: #e69f68;
+}
+
+/* Cores */
+/* #E7985C */
+/* #A5583C */
+/* #D3B094 */
+/* #F5F1EF */
+/* #E19150 */
