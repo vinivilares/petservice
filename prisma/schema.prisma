@@ -15,69 +15,58 @@ model Tutor {
   password String
   tipo     String
   nome     String?
-
-  endereco   Endereco? @relation(fields: [enderecoId], references: [id], onDelete: Cascade)
+  pet Pet[]
+  endereco   Endereco? @relation(fields: [enderecoId], references: [id])
   enderecoId Int?
-
-  Pet Pet[]
-
   @@map("tutores")
 }
 
 model Pet {
-  id String @id @default(cuid())
-
-  tutor   Tutor?  @relation(fields: [tutorId], references: [id], onDelete: Cascade)
-  tutorId String?
-
+  id      String    @id @default(cuid())
   especie String?
-  idade   Int?
+  idade   DateTime?
   nome    String?
   raca    String?
-
-  vacinas Vacina[]
-
+  Vacina Vacina[]
+  Tutor   Tutor?  @relation(fields: [tutorId], references: [id])
+  tutorId String?
   @@map("pets")
 }
 
 model Vacina {
-  id String @id @default(cuid())
-
-  Pet   Pet?    @relation(fields: [petId], references: [id], onDelete: Cascade)
+  id Int @id @default(autoincrement())
+  nome  String?
+  data  DateTime?
+  doses Int
+  pet   Pet?      @relation(fields: [petId], references: [id])
   petId String?
-
   @@map("vacinas")
 }
 
 model Petshop {
-  id       String @id @default(cuid())
-  email    String @unique
+  id       String  @id @default(cuid())
+  email    String  @unique
   password String
   tipo     String
-
-  nome String?
-
-  endereco   Endereco? @relation(fields: [enderecoId], references: [id], onDelete: Cascade)
+  nome     String?
+  veterinario Veterinario[]
+  endereco   Endereco? @relation(fields: [enderecoId], references: [id])
   enderecoId Int?
-
-  servicos Servico[]
-
+  Servico    Servico[]
   @@map("petshops")
 }
 
 model Veterinario {
-  id       String @id @default(cuid())
-  email    String @unique
+  id       String  @id @default(cuid())
+  email    String  @unique
   password String
   tipo     String
-
-  nome String?
-
-  endereco   Endereco? @relation(fields: [enderecoId], references: [id], onDelete: Cascade)
+  nome     String?
+  endereco   Endereco? @relation(fields: [enderecoId], references: [id])
   enderecoId Int?
-
-  servicos Servico[]
-
+  Petshop   Petshop?  @relation(fields: [petshopId], references: [id])
+  petshopId String?
+  Servico   Servico[]
   @@map("veterinarios")
 }
 
@@ -89,21 +78,28 @@ model Endereco {
   bairro      String
   localidade  String
   uf          String
-
   Veterinario Veterinario[]
   Petshop     Petshop[]
   Tutor       Tutor[]
+  @@map("enderecos")
 }
 
 model Servico {
-  id Int @id @default(autoincrement())
-
-  nome      String
+  id       Int     @id @default(autoincrement())
+  nmServ   NmServ? @relation(fields: [nmServId], references: [id])
+  nmServId Int?
   descricao String
   preco     Decimal
+  veterinario   Veterinario? @relation(fields: [veterinarioId], references: [id])
+  veterinarioId String?
+  petshop   Petshop? @relation(fields: [petshopId], references: [id])
+  petshopId String?
+  @@map("servicos")
+}
 
-  Veterinario   Veterinario? @relation(fields: [veterinarioId], references: [id], onDelete: Cascade)
-  veterinarioId String
-  Petshop       Petshop?     @relation(fields: [petshopId], references: [id])
-  petshopId     String
+model NmServ {
+  id          Int    @id @default(autoincrement())
+  NomeServico String
+  Servico Servico[]
+  @@map("nomeServicos")
 }
