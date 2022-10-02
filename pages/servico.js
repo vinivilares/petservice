@@ -1,5 +1,4 @@
-import {getSession} from "next-auth/react"
-import {buscarUser} from "../lib/prisma"
+
 
 export default function Servicos({data}) {
   return (
@@ -7,54 +6,76 @@ export default function Servicos({data}) {
 
       <br/>
       <br/>
- 625k     <br/>
+      <br/>
 
       <div>
 
         <h1> SERVIÇOS </h1>
-
-        <div className="imag">
-          
           <img url = 'https://cdn-icons-png.flaticon.com/512/1665/1665629.png'/>
           <img url = 'https://cdn-icons-png.flaticon.com/512/1665/1665628.png'/>
           <img url = 'https://cdn-icons-png.flaticon.com/512/748/748122.png'/>   
-        </div>
+        
       </div>
 
-      {/* <ul>
-        {data.servicos.map(item =>(
+       <ul>
+
+        {data.map(item =>(
       
         
-          <li >{item.descricao}</li>
+          <li >{item.nome}</li>
 
         ))}
         <li>
 
         </li>
-      </ul>  */}
+      </ul>  
     
     </main>
+  
   )
 }
-// pegando o contexto (quam essa logado na pag.)
-export async function getServerSideProps(context) {
 
-   const userSession = await getSession(context) 
+export async function getServerSideProps() {
 
-   const user = await buscarUser(userSession.user.email)
-
-   const response = await fetch(
-     `http://localhost:3000/api/petVetId/${user.id}`);
-     console.log(user.id)
-    
-   const data = await response.json();
-   
+  
+  const data = [
+    {
+      id: 1,
+      nome: "Banho e Tosa",
+    },
+    {
+      id: 2,
+      nome: "Consulta",
+    },
+    {
+      id: 3,
+      nome: "Serviço de veterinario",
+    },
+    {
+      id: 4,
+      nome: "Internação ",
+    },
+    {
+      id: 5,
+      nome: "teste2",
+    }
+  ];
   return{
     props:{
-      data : servicos
+      data
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
