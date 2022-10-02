@@ -23,7 +23,7 @@ export default function Home() {
       password: enteredPassword,
     });
 
-    router.push("/");
+    await router.push("/")
   }
   return (
     <div className={styles.main}>
