@@ -14,12 +14,13 @@ export default function Signup() {
   const nomeInputRef = useRef();
 
   const [endereco, setEndereco] = useState({
-    cep: "",
-    logradouro: "",
-    complemento: "",
-    bairro: "",
-    localidade: "",
-    uf: "",
+    cep: undefined,
+    logradouro: undefined,
+    complemento: undefined,
+    numero: undefined,
+    bairro: undefined,
+    localidade: undefined,
+    uf: undefined,
   });
 
   async function enderecoHandler() {
@@ -62,7 +63,7 @@ export default function Signup() {
         enteredNome,
         endereco
       );
-      // router.push("/");
+      await router.push("/");
     } catch (error) {
       console.log(error.message);
     }
@@ -125,6 +126,17 @@ export default function Signup() {
           />
         </div>
 
+        <div className={styles.input}>
+          <label htmlFor="numero">Numero:</label>
+          <input
+            id="numero"
+            type={"text"}
+            value={endereco.numero}
+            onChange={({ target }) => {
+              setEndereco({ ...endereco, numero: target.value });
+            }}
+          />
+        </div>
         <div className={styles.input}>
           <label htmlFor="complemento">Complemento:</label>
           <input

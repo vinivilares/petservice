@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const data = req.body;
     const { email, password, tipo, nome, endereco } = data;
-    const { cep, logradouro, complemento, bairro, localidade, uf } = endereco;
+    const { cep, logradouro, numero, complemento, bairro, localidade, uf } = endereco;
 
     if (
       !email ||
@@ -35,6 +35,7 @@ export default async function handler(req, res) {
       data: {
         cep: cep,
         logradouro: logradouro,
+        numero : numero,
         complemento: complemento,
         bairro: bairro,
         localidade: localidade,
