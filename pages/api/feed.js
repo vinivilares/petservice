@@ -6,7 +6,8 @@ export default async function handler(req, res) {
       id: true,
       tipo: true,
       nome: true,
-      enderecoId: true,
+
+      endereco: true,
     },
   });
   const veterinarios = await prisma.veterinario.findMany({
@@ -14,7 +15,8 @@ export default async function handler(req, res) {
       id: true,
       tipo: true,
       nome: true,
-      enderecoId: true,
+
+      endereco: true,
     },
   });
 

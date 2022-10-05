@@ -7,30 +7,33 @@
 .main {
   display: flex;
   flex-direction: column;
-  background-color: #f5f1ef;;
+  background-color: #f5f1ef;
   height: 100vh;
-  text-align: center;
-}
-
-.title {
   text-align: center;
 }
 
 .form {
   text-align: center;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .input {
-  display: block;
+  /* display: block; */
   height: 40px;
 }
 
+.submit {
+  display: flex;
+  margin: auto;
+  width: 400px;
+}
+
 .action > button {
-  background-color: #E19150;
+  background-color: #e19150;
   border: none;
   width: 150px;
   height: 40px;
+  margin: auto 10px;
 }
 
 .action > button:hover {

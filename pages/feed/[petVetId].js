@@ -9,11 +9,18 @@ export default function PetVetId({ petVetId }) {
       <h1>{petVetId.dados.nome}</h1>
       <p>{petVetId.dados.tipo}</p>
       <h2>Endereço</h2>
-      <p>CEP: {petVetId.endereco.cep}</p>
       <p>
         Endereço: {petVetId.endereco.logradouro}, {petVetId.endereco.bairro},{" "}
         {petVetId.endereco.localidade} - {petVetId.endereco.uf}
       </p>
+      <p>CEP: {petVetId.endereco.cep}</p>
+      <h2>Serviços</h2>
+      <ul>
+        {petVetId.servicos.map((servico) => (
+          <li key={servico.id}>{servico.nmServ.NomeServico}</li>
+        ))}
+      </ul>
+      {console.log(petVetId)}
     </div>
   );
 }

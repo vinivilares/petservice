@@ -6,7 +6,8 @@ import { buscarUser, prisma } from "../../../lib/prisma";
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const data = req.body;
-    const { email, password, tipo, nome } = data;
+    const { email, password, tipo, nome, endereco } = data;
+    const { cep, logradouro, complemento, bairro, localidade, uf } = endereco;
 
     if (
       !email ||
@@ -30,6 +31,17 @@ export default async function handler(req, res) {
 
     const hashedPassword = await hashPassword(password);
 
+    const userEndereco = await prisma.endereco.create({
+      data: {
+        cep: cep,
+        logradouro: logradouro,
+        complemento: complemento,
+        bairro: bairro,
+        localidade: localidade,
+        uf: uf
+      },
+    });
+
     // Criação da conta do tutor
     if (tipo === "tutor") {
       const user = await prisma.tutor.create({
@@ -38,6 +50,7 @@ export default async function handler(req, res) {
           password: hashedPassword,
           tipo: tipo,
           nome: nome,
+          enderecoId: userEndereco.id,
         },
       });
     }
@@ -50,6 +63,7 @@ export default async function handler(req, res) {
           password: hashedPassword,
           tipo: tipo,
           nome: nome,
+          enderecoId: userEndereco.id,
         },
       });
     }
@@ -62,6 +76,7 @@ export default async function handler(req, res) {
           nome: nome,
           password: hashedPassword,
           tipo: tipo,
+          enderecoId: userEndereco.id,
         },
       });
     }
