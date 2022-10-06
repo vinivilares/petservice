@@ -1,3 +1,37 @@
 .main {
   margin-top: 100px;
 }
+
+.top {
+  display: flex;
+  margin: 30px;
+}
+
+.dados {
+  margin-left: 2em;
+}
+
+.dadosTipo {
+  text-transform: capitalize;
+}
+
+.servicos {
+  text-align: center;
+  margin: auto;
+  border: 1px solid black;
+  width: 80%;
+}
+
+.listServicos {
+  list-style-type: none;
+  display: flex;
+  padding: 1em;
+}
+
+.listServicos > li {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+}
