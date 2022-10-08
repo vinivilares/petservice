@@ -1,8 +1,29 @@
 import styles from "../styles/Vacinas.module.css";
 import { getSession } from "next-auth/react";
 import { buscarUser } from "../lib/prisma";
+import { useState } from "react";
 
-export default function Vacinas({ data }) {
+export default function Vacinas({ data, user }) {
+  const [vacina, setVacina] = useState({
+    id: undefined,
+    nome: undefined,
+    data: undefined,
+    doses: undefined,
+    petId: undefined,
+  });
+
+  async function deleteHandler(vacinaId) {
+    await this.setVacina({ ...vacina, id: vacinaId });
+    const response = await fetch(`/api/vacinas/${user}`, {
+      method: "DELETE",
+      body: JSON.stringify({ vacina }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+  }
+
   return (
     <div className={styles.main}>
       <h1>Histórico de Vacinas</h1>
@@ -26,7 +47,7 @@ export default function Vacinas({ data }) {
                 <td>{vac.data}</td>
                 <td>
                   <button>Editar</button>
-                  <button>Excluir</button>
+                  <button onClick={() => deleteHandler(vac.id)}>Excluir</button>
                 </td>
               </tr>
             ))
@@ -47,6 +68,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       data: data,
+      user: user.id,
     },
   };
 }
