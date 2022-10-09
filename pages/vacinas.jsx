@@ -2,8 +2,12 @@ import styles from "../styles/Vacinas.module.css";
 import { getSession } from "next-auth/react";
 import { buscarUser } from "../lib/prisma";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Vacinas({ data, user }) {
+  const router = useRouter();
+  const [modal, setModal] = useState(false);
+  const [modalDelete, setModalDelete] = useState(false);
   const [vacina, setVacina] = useState({
     id: undefined,
     nome: undefined,
@@ -13,21 +17,54 @@ export default function Vacinas({ data, user }) {
   });
 
   async function deleteHandler(vacinaId) {
-    await this.setVacina({ ...vacina, id: vacinaId });
     const response = await fetch(`/api/vacinas/${user}`, {
       method: "DELETE",
-      body: JSON.stringify({ vacina }),
+      body: JSON.stringify(vacina),
       headers: {
         "Content-Type": "application/json",
       },
     });
     const data = await response.json();
+    router.reload();
   }
 
   return (
     <div className={styles.main}>
       <h1>Histórico de Vacinas</h1>
-      <button>Adicionar</button>
+      <div>
+        <button onClick={() => setModal(true)}>Adicionar</button>
+      </div>
+      {modal ? (
+        <form className={styles.modal}>
+          <div>
+            <h1>Adicionar</h1>
+            <div>
+              <label>Nome do pet: </label>
+              <select>
+                {data.map(pet=><option>
+                  {pet.nome}
+                </option>)}
+              </select>
+            </div>
+            <div>
+              <label>Tipo da Vacina: </label>
+              <input type="text" />
+            </div>
+            <div>
+              <label>Data de vacinação: </label>
+              <input type="date" />
+            </div>
+            <div>
+              <label>Número de doses: </label>
+              <input type="number" />
+            </div>
+            <div className={styles.actions}>
+              <button>Salvar</button>
+              <button onClick={() => setModal(false)}>Cancelar</button>
+            </div>
+          </div>
+        </form>
+      ) : null}
       <table className={styles.tabela}>
         <thead>
           <tr>
@@ -43,11 +80,16 @@ export default function Vacinas({ data, user }) {
             item.Vacina.map((vac) => (
               <tr key={vac.id} className={styles.lista}>
                 <td>{item.nome}</td>
-                <td>{vac.nome}</td>
                 <td>{vac.data}</td>
+                <td>{vac.nome}</td>
                 <td>
                   <button>Editar</button>
-                  <button onClick={() => deleteHandler(vac.id)}>Excluir</button>
+                  <button
+                    onMouseOver={() => setVacina({ ...vacina, id: vac.id })}
+                    onClick={() => deleteHandler(vac.id)}
+                  >
+                    Excluir
+                  </button>
                 </td>
               </tr>
             ))
