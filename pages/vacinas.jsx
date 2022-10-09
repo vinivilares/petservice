@@ -4,19 +4,22 @@ import { buscarUser } from "../lib/prisma";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-export default function Vacinas({ data, user }) {
+export default function Vacinas({ data, user, pets }) {
   const router = useRouter();
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState({
+    update: false,
+    open: false,
+  });
   const [modalDelete, setModalDelete] = useState(false);
   const [vacina, setVacina] = useState({
     id: undefined,
     nome: undefined,
     data: undefined,
     doses: undefined,
-    petId: undefined,
+    petNome: undefined,
   });
 
-  async function deleteHandler(vacinaId) {
+  async function deleteHandler() {
     const response = await fetch(`/api/vacinas/${user}`, {
       method: "DELETE",
       body: JSON.stringify(vacina),
@@ -28,38 +31,84 @@ export default function Vacinas({ data, user }) {
     router.reload();
   }
 
+  async function adicionarVacina(e) {
+    e.preventDefault();
+    const response = await fetch(`/api/vacinas/${user}`, {
+      method: modal.update === false ? "POST" : "PUT",
+      body: JSON.stringify(vacina),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    router.reload();
+  }
+
+  function editarHandler(nome, data, doses, petNome, id) {
+    setModal({ open: true, update: true });
+    setVacina({
+      nome: nome,
+      data: data,
+      doses: doses,
+      petNome: petNome,
+      id: id,
+    });
+  }
+
   return (
     <div className={styles.main}>
       <h1>Histórico de Vacinas</h1>
-      <div>
-        <button onClick={() => setModal(true)}>Adicionar</button>
+      <div className={styles.adicionar}>
+        <button onClick={() => setModal({ open: true, update: false })}>
+          Adicionar
+        </button>
       </div>
-      {modal ? (
-        <form className={styles.modal}>
+      {modal.open ? (
+        <form method="POST" onSubmit={adicionarVacina} className={styles.modal}>
           <div>
-            <h1>Adicionar</h1>
+            {modal.update ? <h1>Atualizar</h1> : <h1>Adicionar</h1>}
             <div>
               <label>Nome do pet: </label>
-              <select>
-                {data.map(pet=><option>
-                  {pet.nome}
-                </option>)}
+              <select
+                onChange={({ target }) =>
+                  setVacina({ ...vacina, petNome: target.value })
+                }
+              >
+                {pets.map((pet) => (
+                  <option key={pet.id}>{pet.nome}</option>
+                ))}
               </select>
             </div>
             <div>
               <label>Tipo da Vacina: </label>
-              <input type="text" />
+              <input
+                value={vacina.nome}
+                type="text"
+                onChange={({ target }) =>
+                  setVacina({ ...vacina, nome: target.value })
+                }
+              />
             </div>
             <div>
               <label>Data de vacinação: </label>
-              <input type="date" />
+              <input
+                type="date"
+                onChange={({ target }) =>
+                  setVacina({ ...vacina, data: target.value })
+                }
+              />
             </div>
             <div>
               <label>Número de doses: </label>
-              <input type="number" />
+              <input
+                type="number"
+                onChange={({ target }) =>
+                  setVacina({ ...vacina, doses: target.value })
+                }
+              />
             </div>
             <div className={styles.actions}>
-              <button>Salvar</button>
+              <button type="submit">Salvar</button>
               <button onClick={() => setModal(false)}>Cancelar</button>
             </div>
           </div>
@@ -71,6 +120,7 @@ export default function Vacinas({ data, user }) {
             <th>Nome do Pet</th>
             <th>Data de aplicação da Vacina</th>
             <th>Vacina aplicada</th>
+            <th>Doses</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -82,8 +132,21 @@ export default function Vacinas({ data, user }) {
                 <td>{item.nome}</td>
                 <td>{vac.data}</td>
                 <td>{vac.nome}</td>
+                <td>{vac.doses}</td>
                 <td>
-                  <button>Editar</button>
+                  <button
+                    onClick={() =>
+                      editarHandler(
+                        vac.nome,
+                        vac.data,
+                        vac.doses,
+                        item.nome,
+                        vac.id
+                      )
+                    }
+                  >
+                    Editar
+                  </button>
                   <button
                     onMouseOver={() => setVacina({ ...vacina, id: vac.id })}
                     onClick={() => deleteHandler(vac.id)}
@@ -106,11 +169,13 @@ export async function getServerSideProps(context) {
 
   const response = await fetch(`http://localhost:3000/api/vacinas/${user.id}`);
   const data = await response.json();
-
+  const tutor = await fetch(`http://localhost:3000/api/tutor/${user.id}`);
+  const pets = await tutor.json();
   return {
     props: {
       data: data,
       user: user.id,
+      pets: pets.pet,
     },
   };
 }
