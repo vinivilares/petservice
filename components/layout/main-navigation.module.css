@@ -10,8 +10,9 @@
   width: 100%;
 }
 
-.header h2 {
+.header svg {
   cursor: pointer;
+  height: 35px;
 }
 
 .menu > ul {

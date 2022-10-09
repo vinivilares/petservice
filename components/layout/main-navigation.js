@@ -7,11 +7,12 @@ import Settings from "../icons/settings";
 import Pets from "../icons/pets";
 import Vacina from "../icons/vacina";
 import Servicos from "../icons/servicos";
+import Logo from "../icons/logo";
 
 function MainNavigation() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  
+
   function handleLogout() {
     signOut();
   }
@@ -25,7 +26,8 @@ function MainNavigation() {
   return (
     <header className={styles.header}>
       <Link href="/">
-        <h2>PetService</h2>
+        <Logo />
+        {/* <h2>Teste</h2> */}
       </Link>
       <nav className={styles.menu}>
         <ul>
