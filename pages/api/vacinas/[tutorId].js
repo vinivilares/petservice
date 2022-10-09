@@ -34,21 +34,45 @@ export default async function handler(req, res) {
     res.status(200).json({ mensagem: "Deletado com sucesso!" });
     return;
   }
+
+  if (req.method === "POST") {
+    const { nome, data, doses, petNome } = req.body;
+    const pet = await prisma.pet.findFirst({
+      where: {
+        nome: petNome,
+      },
+    });
+    const vacina = await prisma.vacina.create({
+      data: {
+        nome: nome,
+        data: new Date(data),
+        doses: parseInt(doses),
+        petId: pet.id,
+      },
+    });
+    res.status(201).json({ mensagem: "Criado com sucesso" });
+    return;
+  }
+
+  if (req.method === "PUT") {
+    const { id, nome, data, doses, petNome } = req.body;
+    const pet = await prisma.pet.findFirst({
+      where: {
+        nome: petNome,
+      },
+    });
+    const vacina = await prisma.vacina.update({
+      data: {
+        nome: nome,
+        data: new Date(data),
+        doses: parseInt(doses),
+        petId: pet.id,
+      },
+      where: {
+        id: id,
+      }
+    });
+    res.status(201).json({ mensagem: "Criado com sucesso" });
+    return;
+  }
 }
-
-
-// async function adicionarVacina( {
-//   const response = await fetch(`/api/vacinas/${user}`, {
-//     method: "CREATE",
-//     body: JSON.stringify(vacina),
-//     data:{
-//       petVetor[?] : petVetor[?]
-//       vacina : vacina
-//       dataVacina : dataVacina
-//       doses : doses
-
-//     }
-//   });
-//   const data = await response.json();
-//   router.reload();
-// }

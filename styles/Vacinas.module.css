@@ -83,6 +83,23 @@
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.13);
 }
 
+.adicionar {
+  width:50%;
+  text-align: center;
+  margin: auto;
+  padding:1em;
+
+}
+
+.adicionar button{
+  width:100%;
+  border:none;
+  height:2em;
+  background-color: #e7985c;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.13);
+  border-radius: 10px;
+  cursor:pointer
+}
 
 /* Cores */
 /* #E7985C */
