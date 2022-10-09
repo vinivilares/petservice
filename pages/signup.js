@@ -14,15 +14,20 @@ export default function Signup() {
   const nomeInputRef = useRef();
 
   const [endereco, setEndereco] = useState({
-    cep: "",
-    logradouro: "",
-    complemento: "",
-    bairro: "",
-    localidade: "",
-    uf: "",
+    cep: undefined,
+    logradouro: undefined,
+    complemento: undefined,
+    numero: undefined,
+    bairro: undefined,
+    localidade: undefined,
+    uf: undefined,
   });
 
   async function enderecoHandler() {
+    if (!endereco.cep) {
+      return;
+    }
+
     const response = await fetch(
       `https://viacep.com.br/ws/${endereco.cep}/json/`
     );
@@ -37,7 +42,6 @@ export default function Signup() {
       localidade: data.bairro,
       uf: data.uf,
     });
-    console.log(data);
   }
 
   const router = useRouter();
@@ -56,10 +60,10 @@ export default function Signup() {
         enteredEmail,
         enteredPassword,
         enteredTipo,
-        enteredNome
+        enteredNome,
+        endereco
       );
-      console.log(result);
-      router.push("/");
+      await router.push("/");
     } catch (error) {
       console.log(error.message);
     }
@@ -123,6 +127,17 @@ export default function Signup() {
         </div>
 
         <div className={styles.input}>
+          <label htmlFor="numero">Numero:</label>
+          <input
+            id="numero"
+            type={"text"}
+            value={endereco.numero}
+            onChange={({ target }) => {
+              setEndereco({ ...endereco, numero: target.value });
+            }}
+          />
+        </div>
+        <div className={styles.input}>
           <label htmlFor="complemento">Complemento:</label>
           <input
             id="complemento"
@@ -168,14 +183,16 @@ export default function Signup() {
           />
         </div>
 
-        <div className={styles.action}>
-          <button type={"submit"}>Cadastrar</button>
-        </div>
+        <div className={styles.submit}>
+          <div className={styles.action}>
+            <button type={"submit"}>Cadastrar</button>
+          </div>
 
-        <div className={styles.action}>
-          <Link href={"/"}>
-            <button>Cancelar</button>
-          </Link>
+          <div className={styles.action}>
+            <Link href={"/"}>
+              <button>Cancelar</button>
+            </Link>
+          </div>
         </div>
       </form>
     </div>
@@ -191,7 +208,7 @@ export async function getServerSideProps(context) {
 
     return {
       redirect: {
-        destination: user.tipo === "tutor" ? "/feed" : "/dashboard",
+        destination: user.tipo === "tutor" ? "/feed" : "/servico",
       },
     };
   }
@@ -205,10 +222,10 @@ export async function getServerSideProps(context) {
   }
 }
 
-async function createUser(email, password, tipo, nome) {
+async function createUser(email, password, tipo, nome, endereco) {
   const response = await fetch("/api/auth/signup", {
     method: "POST",
-    body: JSON.stringify({ email, password, tipo, nome }),
+    body: JSON.stringify({ email, password, tipo, nome, endereco }),
     headers: {
       "Content-Type": "application/json",
     },

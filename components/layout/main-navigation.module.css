@@ -4,13 +4,15 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 15px;
+  z-index: 1;
   position: fixed;
   top: 0;
   width: 100%;
 }
 
-.header h2 {
+.header svg {
   cursor: pointer;
+  height: 35px;
 }
 
 .menu > ul {

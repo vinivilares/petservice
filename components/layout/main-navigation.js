@@ -6,13 +6,15 @@ import Home from "../icons/home";
 import Settings from "../icons/settings";
 import Pets from "../icons/pets";
 import Vacina from "../icons/vacina";
+import Servicos from "../icons/servicos";
+import Logo from "../icons/logo";
 
 function MainNavigation() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
   function handleLogout() {
-    signOut().then(router.push("/"));
+    signOut();
   }
 
   function handleConfig() {
@@ -24,7 +26,8 @@ function MainNavigation() {
   return (
     <header className={styles.header}>
       <Link href="/">
-        <h2>PetService</h2>
+        <Logo />
+        {/* <h2>Teste</h2> */}
       </Link>
       <nav className={styles.menu}>
         <ul>
@@ -47,6 +50,12 @@ function MainNavigation() {
                 </li>
               </Link>
 
+              <Link href="/servico">
+                <li className={styles.icon}>
+                  <Servicos />
+                </li>
+              </Link>
+
               <Link href="/vacinas">
                 <li className={styles.icon}>
                   <Vacina />
@@ -59,9 +68,9 @@ function MainNavigation() {
 
               <ul id="submenu" className={styles.submenu}>
                 <li>
-                  <Link href={"/tutor"}>Meu Perfil</Link>
+                  <Link href={"/configuracoes"}>Meu Perfil</Link>
                 </li>
-                <li onClick={handleLogout}>Sair</li>
+                <li onClick={signOut}>Sair</li>
               </ul>
             </>
           )}

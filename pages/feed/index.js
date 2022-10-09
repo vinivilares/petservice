@@ -69,9 +69,9 @@ export default function Feed({ lojas }) {
             <div className={styles.rightColumn}>
               <h3>{loja.nome}</h3>
               <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
+                {loja.endereco.logradouro} - {loja.endereco.cep}
               </p>
+
               <Link href={"feed/" + loja.id}>
                 <button>Ver Perfil</button>
               </Link>

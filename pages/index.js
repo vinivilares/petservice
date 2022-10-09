@@ -76,7 +76,7 @@ export async function getServerSideProps(context) {
     const user = await buscarUser(userSession.user.email);
     return {
       redirect: {
-        destination: user.tipo === "tutor" ? "/feed" : "/dashboard",
+        destination: user.tipo === "tutor" ? "/feed" : "/servico",
       },
     };
   }
