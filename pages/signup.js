@@ -208,7 +208,7 @@ export async function getServerSideProps(context) {
 
     return {
       redirect: {
-        destination: user.tipo === "tutor" ? "/feed" : "/dashboard",
+        destination: user.tipo === "tutor" ? "/feed" : "/servico",
       },
     };
   }

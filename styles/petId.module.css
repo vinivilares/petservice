@@ -1,0 +1,80 @@
+.main {
+  margin: auto;
+  margin-top: 5em;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+}
+
+.info div {
+  margin: 0px 1em;
+}
+
+.vacinas {
+  text-align: center;
+}
+
+.tabela {
+  width: 70%;
+  margin: auto;
+  margin-bottom: 2em;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.13);
+}
+
+.tabela thead {
+  background-color: #e7985c;
+}
+
+.tabela tr:nth-child(even) {
+  background-color: #f5f1ef;
+}
+
+.actions {
+  margin: auto;
+}
+
+.actions button {
+  border: none;
+  height: 3em;
+  width: 10em;
+  margin: 10px;
+  background-color: #e7985c;
+}
+
+.actions button:hover {
+  cursor: pointer;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.13);
+}
+
+.modal {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.13);
+
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  padding-top: 100px;
+  background-color: rgba(0, 0, 0, 0.4);
+  overflow: auto;
+}
+
+.modal > div:nth-child(1) {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border-radius: 4px;
+  max-width: 25em;
+}
+
+.modal .actions {
+  display: flex;
+  justify-content: center;
+}

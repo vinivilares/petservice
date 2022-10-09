@@ -1,0 +1,88 @@
+.lista {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  justify-content: center;
+}
+
+.adicionar {
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+  width: 182px;
+  align-items: center;
+  background-color: #f5f1ef;
+  padding: 1em;
+  border-radius: 1em;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.13);
+  cursor: pointer;
+}
+
+.petCard {
+  display: flex;
+  margin: 1em;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5f1ef;
+  padding: 1em;
+  border-radius: 1em;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.13);
+}
+
+.petCard:hover {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.205);
+}
+
+.petCard img {
+  border-radius: 1em;
+}
+
+.petCard > a {
+  width: 100%;
+  padding: 0.5em;
+  background-color: #e7985c;
+  border-radius: 0.5em;
+  margin-top: 1em;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.13);
+  text-align: center;
+}
+
+.modal {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.13);
+
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  padding-top: 100px;
+  background-color: rgba(0, 0, 0, 0.4);
+  overflow: auto;
+}
+
+.modal > div:nth-child(1) {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border-radius: 4px;
+  max-width: 25em;
+}
+
+.modal .actions {
+  display: flex;
+  justify-content: center;
+}
+.actions button {
+  border: none;
+  height: 3em;
+  width: 10em;
+  margin: 10px;
+  background-color: #e7985c;
+}
+
+.actions button:hover {
+  cursor: pointer;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.13);
+}
