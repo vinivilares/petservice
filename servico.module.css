@@ -1,0 +1,130 @@
+/* Cores */
+/* #E7985C */
+/* #A5583C */
+/* #D3B094 */
+/* #F5F1EF */
+/* #E19150 */
+
+.main {
+    padding: 100px;
+    padding-left: 20%;
+    align-items: center;
+    font-size: 15px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.subMenu {
+    background-color: #E89B5D;
+    border-radius: 5px;
+    display: flex;
+    width: 800px;
+    border: 1px solid #E89B5D;
+    border-style: groove;
+    justify-content: center;
+
+}
+
+.subMenu>h1 {
+   
+    font-size: 23px;
+    text-align: center;
+}
+
+.botao {
+    position: relative;
+    top: 5px;
+    border-radius: 5px;
+    display: flex;
+    width: 800px;
+    justify-content: center;
+
+}
+
+.botao>button {
+    
+    align-items: center;
+    width: 410px;
+    height: 30px;
+    border-radius: 2px;
+    background-color: #F0E2DD;
+    border: 1px #F0E2DD;
+    border-style: groove;
+}
+
+.botao>button:hover {
+    background-color: #E89B5D;
+    background-color: #E89B5D;
+    border: 1px #E89B5D;
+    border-style: groove;
+
+}
+
+
+.box {
+    margin: 15px;
+    display: grid;
+    width: 800px;
+    grid-template-columns: 1fr 1fr 1fr;
+
+}
+
+
+.serv {
+
+    background-color: #FFF8F5;
+    border: 1px #FFF8F5 solid;
+    width: 260px;
+    height: 230px;
+    justify-content: center;
+    margin: 5px;
+    border: 1px solid black;
+}
+
+.serv>h3 {
+    
+    font-size: 17px;
+    text-align: center;
+
+}
+.serv>button {
+    margin-top: 10px;
+    margin-left: 5px;
+    width: 110px;
+    height: 25px;
+    background-color: #F0E2DD;
+    border: 1px #F0E2DD;
+    border-style: groove;
+    border-radius: 2px;
+
+}
+
+.serv>button:hover {
+    background-color: #E89B5D;
+    background-color: #E89B5D;
+    border: 1px #E89B5D;
+    border-style: groove;
+
+}
+
+.serv:hover {
+    background-color: whitesmoke;
+}
+
+.add{
+    display: none;
+    width: 800px;
+    border-radius: 2px;
+    border: 2px solid #E89B5D;
+    background-color: #E89B5D;
+    
+}
+.add>h1{
+    text-align: center;
+    color: white;
+}
+
+
