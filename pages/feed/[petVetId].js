@@ -49,8 +49,11 @@ export default function PetVetId({ petVetId }) {
 }
 
 export async function getServerSideProps(context) {
+  // const response = await fetch(
+  //   `http://localhost:3000/api/petVetId/${context.params.petVetId}`
+  // );
   const response = await fetch(
-    `http://localhost:3000/api/petVetId/${context.params.petVetId}`
+    `https://petservice.vercel.app/api/petVetId/${context.params.petVetId}`
   );
   const data = await response.json();
   // const endereco = await buscarEndereco(id.enderecoId);

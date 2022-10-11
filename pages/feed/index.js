@@ -93,8 +93,8 @@ export async function getServerSideProps(context) {
       },
     };
   } else {
-    const response = await fetch("http://localhost:3000/api/feed");
-    // const response = await fetch("https://petservice.vercel.app/api/feed");
+    // const response = await fetch("http://localhost:3000/api/feed");
+    const response = await fetch("https://petservice.vercel.app/api/feed");
     const lojas = await response.json();
 
     return {

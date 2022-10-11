@@ -1,0 +1,137 @@
+/* Cores */
+/* #E7985C */
+/* #A5583C */
+/* #D3B094 */
+/* #F5F1EF */
+/* #E19150 */
+
+.main {
+  padding: 100px;
+  padding-left: 20%;
+  align-items: center;
+  font-size: 15px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.subMenu {
+  background-color: #e89b5d;
+  border-radius: 5px;
+  display: flex;
+  width: 900px;
+  border-style: groove;
+  justify-content: center;
+  border: #e89b5d 1px solid;
+}
+
+.subMenu > h1 {
+  font-size: 23px;
+  text-align: center;
+}
+
+.botao {
+  position: relative;
+  top: 5px;
+  border-radius: 5px;
+  display: flex;
+  width: 900px;
+  justify-content: center;
+}
+
+.botao > button {
+  align-items: center;
+  width: 410px;
+  height: 30px;
+  border-radius: 2px;
+  background-color: #f0e2dd;
+  border: 1px #f0e2dd;
+  border-style: groove;
+}
+
+.botao > button:hover {
+  background-color: #e89b5d;
+  background-color: #e89b5d;
+
+  border-style: groove;
+}
+
+.box {
+  margin-right: -50px;
+  margin: 15px;
+  display: grid;
+  width: 830px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.serv {
+  background-color: #fff8f5;
+  border: 1px #fff8f5 solid;
+  width: 260px;
+  height: 230px;
+  justify-content: center;
+  margin: 5px;
+}
+
+.serv > h3 {
+  font-size: 17px;
+  text-align: center;
+}
+.serv > p {
+  text-align: center;
+}
+.serv > button {
+  width: 110px;
+  height: 25px;
+  background-color: #f0e2dd;
+  border: 1px #f0e2dd groove;
+  border-radius: 2px;
+  top: 50px;
+  left: 20px;
+  position: relative;
+}
+
+.serv > legend {
+  position: relative;
+  top: 10px;
+  text-align: center;
+}
+.serv > button:hover {
+  background-color: #e89b5d;
+  background-color: #e89b5d;
+  border: 1px #e89b5d;
+  border-style: groove;
+}
+
+.serv:hover {
+  background-color: whitesmoke;
+}
+
+.add {
+
+  margin-top: 10px;
+  width: 900px;
+  border-radius: 2px;
+  border: 2px solid #e89b5d;
+  background-color: #e89b5d;
+  border-style: groove;
+  height: 250px;
+ display: flex;
+ justify-content: center;
+ 
+}
+
+
+.formulario {
+  
+  width: 500px;
+  text-align: center;
+  padding: 20px;
+  position: absolute;
+  
+}
+
+.formulario>h1{
+    color:#fff8f5;
+   
+}

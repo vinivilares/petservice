@@ -174,7 +174,10 @@ export async function getServerSideProps(context) {
   const { params } = context;
   const user = await buscarUser(userSession.user.email);
 
-  const response = await fetch(`http://localhost:3000/api/pet/${params.petId}`);
+  // const response = await fetch(`http://localhost:3000/api/pet/${params.petId}`);
+  const response = await fetch(
+    `https://petservice.vercel.app/api/pet/${params.petId}`
+  );
   const pet = await response.json();
   return {
     props: {

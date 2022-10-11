@@ -129,7 +129,10 @@ export async function getServerSideProps(context) {
     };
   }
 
-  const response = await fetch(`http://localhost:3000/api/tutor/${user.id}`);
+  // const response = await fetch(`http://localhost:3000/api/tutor/${user.id}`);
+  const response = await fetch(
+    `https://petservice.vercel.app/api/tutor/${user.id}`
+  );
   const data = await response.json();
 
   return {
