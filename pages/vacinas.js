@@ -5,6 +5,17 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 export default function Vacinas({ data, user, pets }) {
+  console.log(new Date(data[0].idade).toLocaleString());
+  const dtAplicacao = (data) => {
+    return (
+      new Date(data).getDate() +
+      "/" +
+      new Date(data).getMonth() +
+      "/" +
+      new Date(data).getFullYear()
+    );
+  };
+
   const router = useRouter();
   const [modal, setModal] = useState({
     update: false,
@@ -96,6 +107,19 @@ export default function Vacinas({ data, user, pets }) {
                 onChange={({ target }) =>
                   setVacina({ ...vacina, data: target.value })
                 }
+                value={
+                  new Date(vacina.data).toLocaleString("default", {
+                    year: "numeric",
+                  }) +
+                  "-" +
+                  new Date(vacina.data).toLocaleString("default", {
+                    month: "2-digit",
+                  }) +
+                  "-" +
+                  new Date(vacina.data).toLocaleString("default", {
+                    day: "2-digit",
+                  })
+                }
               />
             </div>
             <div>
@@ -105,6 +129,7 @@ export default function Vacinas({ data, user, pets }) {
                 onChange={({ target }) =>
                   setVacina({ ...vacina, doses: target.value })
                 }
+                value={vacina.doses}
               />
             </div>
             <div className={styles.actions}>
@@ -130,7 +155,7 @@ export default function Vacinas({ data, user, pets }) {
             item.Vacina.map((vac) => (
               <tr key={vac.id} className={styles.lista}>
                 <td>{item.nome}</td>
-                <td>{vac.data}</td>
+                <td>{dtAplicacao(vac.data)}</td>
                 <td>{vac.nome}</td>
                 <td>{vac.doses}</td>
                 <td>

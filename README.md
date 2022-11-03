@@ -1,34 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 style="text-align:center;">PetService</h1>
 
-## Getting Started
+![Petservice](https://i.imgur.com/SlFdn7X.png)
 
-First, run the development server:
+<h1 style="text-align:center;">Como usar</h1>
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Primeiro acesse o link [petservice.vercel.app](https://petservice.vercel.app/) para visitar a tela de login
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Login
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+![Login](https://i.imgur.com/QlVR2bz.png)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- Acesse com seu email e senha (minímo 7 digitos)
+- Caso não possua conta, crie uma clicando no botão **Criar Conta**
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Criar conta
 
-## Learn More
+![Criar Conta](https://i.imgur.com/aQ3qEaq.png)
 
-To learn more about Next.js, take a look at the following resources:
+Aqui você poderá criar uma conta para _Tutor_, _Petshop_ ou _Veterinário_
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Acessos
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Acessos do Tutor
 
-## Deploy on Vercel
+## Tela de feed
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![Feed](https://i.imgur.com/Ft0D1P1.png?1)
+Essa tela será visível ao acessar a conta com o perfil de _Tutor_, onde poderá visualizar todos os petshops/veterinários cadastrados no sistema.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Tela de Pets
+
+![Pets](https://i.imgur.com/xd6rO8M.jpg)
+Tela responsável para visualizar e cadastrar os pets do tutor
+
+## Tela de Vacinas
+
+![Vacinas](https://i.imgur.com/GZWoAz5.jpg)
+Tela responsável para visualizar e cadastrar as vacinas dos pets do tutor
+
+## Acessos do _Petshop_/_Veterinário_
+
+Ao efetuar login como _Petshop_/_Veterinário_ será redirecionado para o cadastramento de serviços
+
+![Tela de serviços](https://i.imgur.com/3MowbFu.jpg)
+Tela responsável para visualizar e cadastrar serviços do _Petshop_/_Veterinário_
